@@ -3,14 +3,10 @@ cmake_minimum_required(VERSION 3.15)
 set(CMAKE_TOOLCHAIN_FILE "STM32G0_toolchain.cmake")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Project name and supported languages
 project(blink LANGUAGES C CXX ASM)
-# Set the C and C++ compilers (arm-none-eabi)
-# Specify the target executable
-add_executable(${PROJECT_NAME}.elf)
 
-# Add source files
-target_sources(${PROJECT_NAME}.elf PRIVATE
+# Source files
+add_executable (${PROJECT_NAME}
     src/main.cpp
     stm32_g0_hal/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal.c
     stm32_g0_hal/Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_pwr.c
@@ -21,22 +17,25 @@ target_sources(${PROJECT_NAME}.elf PRIVATE
     stm32_g0_hal/Drivers/CMSIS/Device/ST/STM32G0xx/Source/Templates/gcc/startup_stm32g030xx.s
 )
 
-# Include directories for headers
-target_include_directories(${PROJECT_NAME}.elf PRIVATE
+# Directories with headers
+target_include_directories(${PROJECT_NAME} PRIVATE
     include
     stm32_g0_hal/Drivers/STM32G0xx_HAL_Driver/Inc
     stm32_g0_hal/Drivers/CMSIS/Device/ST/STM32G0xx/Include
     stm32_g0_hal/Drivers/CMSIS/Include
 )
 
-# Linker script for memory mapping
-target_link_options(${PROJECT_NAME}.elf PRIVATE
-    -Wl,--gc-sections  # Remove unused sections
-    -Wl,-Map=${PROJECT_NAME}.map # Generate a map file
+# Linker options
+target_link_options(${PROJECT_NAME} PRIVATE
+    -Wl,--start-group -lc -lm
+    -Wl,--end-group
+    -mcpu=cortex-m0
+    -mthumb
+    -static
 )
 
 # Define compile options
-target_compile_options(${PROJECT_NAME}.elf PRIVATE
+target_compile_options(${PROJECT_NAME} PRIVATE
     -mcpu=cortex-m0
     -mthumb
     -Os                   # Optimize for size
@@ -45,27 +44,23 @@ target_compile_options(${PROJECT_NAME}.elf PRIVATE
     -fno-exceptions       # Disable exceptions for bare-metal code
 )
 
-# Define preprocessor macros
-target_compile_definitions(${PROJECT_NAME}.elf PRIVATE
-  -DSTM32G030xx  # Define the specific MCU
+# Define defines here
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+  STM32G030xx  # Define your MCU
 )
 
-# Linker flags for Cortex-M0 architecture
-target_link_options(${PROJECT_NAME}.elf PRIVATE
-    -mcpu=cortex-m0
-    -mthumb
-    -static
-    -Wl,--start-group -lc -lm -Wl,--end-group
-)
+set(CPUFLAGS "-march=armv6-m -mtune=cortex-m0plus -mthumb -mfloat-abi=soft")
+set(CMAKE_CXX_FLAGS ${CPUFLAGS} CACHE INTERNAL "")
+set(CMAKE_C_FLAGS ${CPUFLAGS} CACHE INTERNAL "")
 
 # Convert .elf firmware to .bin after build
-add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
-    COMMENT "Generating ${PROJECT_NAME}.bin from ${PROJECT_NAME}.elf"
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME} ${PROJECT_NAME}.bin
+    COMMENT "Generating ${PROJECT_NAME}.bin from ${PROJECT_NAME}"
 )
 
 # Print firmware Flash and RAM usage
-add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-    COMMAND ${CMAKE_SIZE} ${PROJECT_NAME}.elf
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_SIZE} ${PROJECT_NAME}
     COMMENT "Displaying firmware size"
 )
