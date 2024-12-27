@@ -28,5 +28,5 @@ Instructions written for Ubuntu (Debian) of simple blink project for STM32G0F6P6
     ```
 1. Upload built firmware to MCU:
     ```bash
-    st-flash write blink.bin 0x8000000
+    st-flash erase && st-flash --reset write blink.bin 0x8000000
     ```
