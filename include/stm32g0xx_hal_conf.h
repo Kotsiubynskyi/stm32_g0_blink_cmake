@@ -35,35 +35,35 @@ extern "C" {
  */
 #define HAL_MODULE_ENABLED
 #define HAL_ADC_MODULE_ENABLED
-// #define HAL_CEC_MODULE_ENABLED
-// #define HAL_COMP_MODULE_ENABLED
+#define HAL_CEC_MODULE_ENABLED
+#define HAL_COMP_MODULE_ENABLED
 #define HAL_CORTEX_MODULE_ENABLED
-// #define HAL_CRC_MODULE_ENABLED
-// #define HAL_CRYP_MODULE_ENABLED
-// #define HAL_DAC_MODULE_ENABLED
+#define HAL_CRC_MODULE_ENABLED
+#define HAL_CRYP_MODULE_ENABLED
+#define HAL_DAC_MODULE_ENABLED
 #define HAL_DMA_MODULE_ENABLED
 #define HAL_EXTI_MODULE_ENABLED
 #define HAL_FLASH_MODULE_ENABLED
-// #define HAL_FDCAN_MODULE_ENABLED
+#define HAL_FDCAN_MODULE_ENABLED
 #define HAL_GPIO_MODULE_ENABLED
-// #define HAL_I2C_MODULE_ENABLED
-// #define HAL_I2S_MODULE_ENABLED
-// #define HAL_IRDA_MODULE_ENABLED
-// #define HAL_IWDG_MODULE_ENABLED
-// #define HAL_LPTIM_MODULE_ENABLED
-// #define HAL_HCD_MODULE_ENABLED
-// #define HAL_PCD_MODULE_ENABLED
+#define HAL_I2C_MODULE_ENABLED
+#define HAL_I2S_MODULE_ENABLED
+#define HAL_IRDA_MODULE_ENABLED
+#define HAL_IWDG_MODULE_ENABLED
+#define HAL_LPTIM_MODULE_ENABLED
+#define HAL_HCD_MODULE_ENABLED
+#define HAL_PCD_MODULE_ENABLED
 #define HAL_PWR_MODULE_ENABLED
 #define HAL_RCC_MODULE_ENABLED
-// #define HAL_RNG_MODULE_ENABLED
-// #define HAL_RTC_MODULE_ENABLED
-// #define HAL_SMARTCARD_MODULE_ENABLED
-// #define HAL_SMBUS_MODULE_ENABLED
-// #define HAL_SPI_MODULE_ENABLED
-// #define HAL_TIM_MODULE_ENABLED
-// #define HAL_UART_MODULE_ENABLED
-// #define HAL_USART_MODULE_ENABLED
-// #define HAL_WWDG_MODULE_ENABLED
+#define HAL_RNG_MODULE_ENABLED
+#define HAL_RTC_MODULE_ENABLED
+#define HAL_SMARTCARD_MODULE_ENABLED
+#define HAL_SMBUS_MODULE_ENABLED
+#define HAL_SPI_MODULE_ENABLED
+#define HAL_TIM_MODULE_ENABLED
+#define HAL_UART_MODULE_ENABLED
+#define HAL_USART_MODULE_ENABLED
+#define HAL_WWDG_MODULE_ENABLED
 
 /* ########################## Register Callbacks selection
  * ############################## */
@@ -129,7 +129,7 @@ extern "C" {
 #if !defined(HSI48_VALUE)
 #define HSI48_VALUE                                                            \
   48000000U /*!< Value of the Internal High Speed oscillator for USB           \
-             FS/SDMMC/RNG in Hz. The real value my vary depending on                                           \
+             FS/SDMMC/RNG in Hz. The real value my vary depending on           \
              manufacturing process variations.*/
 #endif      /* HSI48_VALUE */
 #endif      /* STM32G0C1xx || STM32G0B1xx || STM32G0B0xx */

@@ -1,4 +1,3 @@
-#include "stm32g030xx.h"
 #include "stm32g0xx_hal.h"
 
 extern "C" void SysTick_Handler(void);
@@ -10,7 +9,7 @@ int main() {
 
   while (1) {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
-    HAL_Delay(1000);
+    HAL_Delay(100);
   }
   return 0;
 }
