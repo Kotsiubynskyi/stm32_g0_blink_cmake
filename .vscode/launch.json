@@ -11,7 +11,8 @@
             "device": "STM32G030",
             "servertype": "stlink",
             "preLaunchTask": "debug",
-            "showDevDebugOutput": "none"
+            "showDevDebugOutput": "none",
+            "svdFile": "${workspaceFolder}/svd/STM32G030.svd",
         },
         {
             "name": "Debug with OpenOCD",
@@ -27,7 +28,8 @@
                 "interface/stlink.cfg",
                 "target/stm32g0x.cfg"
             ],
-            "showDevDebugOutput": "none"
+            "svdFile": "${workspaceFolder}/svd/STM32G030.svd",
+            "showDevDebugOutput": "none",
         }
     ]
 }

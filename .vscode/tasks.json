@@ -17,7 +17,7 @@
     {
       "label": "debug",
       "type": "shell",
-      "command": "mkdir -p build; cmake -G Ninja -B build; ninja -C build",
+      "command": "mkdir -p build; cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -B build; ninja -C build",
       "args": [],
       "options": {
       },
