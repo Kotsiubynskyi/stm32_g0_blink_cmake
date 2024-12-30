@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/blink",
+            "type": "cortex-debug",
+            "name": "Debug with ST-Link",
+            "request": "launch",
+            "runToEntryPoint": "main",
+            "device": "STM32G030",
+            "servertype": "stlink",
+            "preLaunchTask": "debug",
+            "showDevDebugOutput": "none"
+        },
+        {
+            "name": "Debug with OpenOCD",
+            "executable": "${workspaceFolder}/build/blink",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "STM32G030",
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": "debug",
+            "runToEntryPoint": "main",
+            "request": "launch",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32g0x.cfg"
+            ],
+            "showDevDebugOutput": "none"
+        }
+    ]
+}

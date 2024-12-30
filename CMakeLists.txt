@@ -27,7 +27,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_compile_options(${PROJECT_NAME} PRIVATE
   -mcpu=cortex-m0
   -mthumb
-  -Os
+  -Og
   -ffunction-sections # Place functions in separate sections
   -fdata-sections # Place data in separate sections
   -fno-exceptions # Disable exceptions for bare-metal code
